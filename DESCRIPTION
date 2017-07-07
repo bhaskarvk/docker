@@ -1,0 +1,18 @@
+Package: docker
+Title: Wraps Docker Python SDK
+Version: 0.0.0.9000
+Authors@R: person("Bhaskar", "Karambelkar", email = "bhaskarvk@gmail.com",
+                  role = c("aut", "cre"))
+Description: Allows accessing Docker SDK from R via the Docker Python SDK using the 'reticulate' package.
+  This is a very thin wrapper that tries to do very little and get out of the way.
+  The user is expected to know how to use the reticulate package to access Python modules, and how the Docker Python SDK works.
+Depends: R (>= 3.0)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: reticulate
+SystemRequirements: Python (>= 2.7)
+RoxygenNote: 6.0.1
+Roxygen: list(markdown = TRUE)
+URL: https://github.com/bhaskarvk/docker
+BugReports: https://github.com/bhaskarvk/docker/issues

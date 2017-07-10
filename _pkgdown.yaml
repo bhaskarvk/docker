@@ -1,0 +1,10 @@
+title: docker
+authors:
+  Bhaskar Karambelkar:
+    href: https://www.karambelkar.info/
+
+template:
+  package: pkgdown.bvk
+  params:
+    bootswatch: yeti
+

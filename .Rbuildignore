@@ -1,5 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^NEWS\.md$
+^README\.md$
 ^README\.Rmd$
 ^README-.*\.png$
 ^cran-comments\.md$
@@ -7,3 +9,4 @@
 ^\.Rprofile\.local$
 ^\.travis\.yml$
 ^\_pkgdown\.yaml$
+^docs$

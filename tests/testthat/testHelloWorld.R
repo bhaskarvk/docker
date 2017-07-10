@@ -1,4 +1,5 @@
-reticulate::use_virtualenv("docker")
+library(reticulate)
+use_virtualenv("docker")
 library(docker)
 
 # helper function to skip tests if we don't have the 'docker' module

@@ -6,3 +6,4 @@
 ^CONDUCT\.md$
 ^\.Rprofile\.local$
 ^\.travis\.yml$
+^\_pkgdown\.yaml$

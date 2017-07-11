@@ -51,8 +51,8 @@ artifacts:
 
 environment:
   global:
-    - _R_CHECK_FORCE_SUGGESTS_: false
-    - PYTHON: "C:\\Python35"
+    _R_CHECK_FORCE_SUGGESTS_: false
+    PYTHON: "C:\\Python35"
 
 notifications:
   - provider: Email

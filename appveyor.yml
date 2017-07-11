@@ -24,8 +24,7 @@ build_script:
   - travis-tool.sh install_deps
 
 before_test:
-  - set PATH="%PYTHON%;%PATH%"
-  - echo %PATH%
+  - echo %RETICULATE_PYTHON%
 
 test_script:
   - travis-tool.sh run_tests
@@ -57,6 +56,7 @@ environment:
   global:
     _R_CHECK_FORCE_SUGGESTS_: false
     PYTHON: "C:\\Python35"
+    RETICULATE_PYTHON: "C:\\Python35"
 
 notifications:
   - provider: Email

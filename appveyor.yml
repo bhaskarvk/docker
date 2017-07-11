@@ -19,7 +19,7 @@ cache:
 # Adapt as necessary starting from here
 
 build_script:
-  - DockerCli.exe -SwitchDaemon
+  - "%DOCKER_INSTALL%\\DockerCli.exe -SwitchDaemon"
   - docker pull alpine
   - "%PYTHON%\\python.exe -m pip install setuptools docker"
   - travis-tool.sh install_deps
@@ -55,6 +55,7 @@ environment:
     DOCKER_HOST: "127.0.0.1:2375"
     _R_CHECK_FORCE_SUGGESTS_: false
     PYTHON: "C:\\Python35"
+    DOCKER_INSTALL: "C:\\Program Files\\Docker\\Docker\\"
 
 notifications:
   - provider: Email

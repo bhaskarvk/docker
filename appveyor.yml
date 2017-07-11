@@ -55,7 +55,7 @@ environment:
     DOCKER_HOST: "127.0.0.1:2375"
     _R_CHECK_FORCE_SUGGESTS_: false
     PYTHON: "C:\\Python35"
-    DOCKER_INSTALL: "C:\\Program Files\\Docker\\Docker\\"
+    DOCKER_INSTALL: "C:\\Program^ Files\\Docker\\Docker\\"
 
 notifications:
   - provider: Email

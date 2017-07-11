@@ -11,8 +11,6 @@ init:
         Import-Module '..\appveyor-tool.ps1'
 
 install:
-  alpine: docker pull alpine
-  docker: "%PYTHON%\\python.exe -m pip install setuptools docker"
   ps: Bootstrap
 
 cache:
@@ -21,6 +19,8 @@ cache:
 # Adapt as necessary starting from here
 
 build_script:
+  - docker pull alpine
+  - "%PYTHON%\\python.exe -m pip install setuptools docker"
   - travis-tool.sh install_deps
 
 test_script:

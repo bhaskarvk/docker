@@ -23,6 +23,9 @@ build_script:
   - "%PYTHON%\\python.exe -m pip install setuptools docker"
   - travis-tool.sh install_deps
 
+before_test:
+  - set PATH="%PYTHON%;%PATH%"
+
 test_script:
   - travis-tool.sh run_tests
 
@@ -53,7 +56,6 @@ environment:
   global:
     _R_CHECK_FORCE_SUGGESTS_: false
     PYTHON: "C:\\Python35"
-    DOCKER_INSTALL: '"C:\\Program Files\\Docker\\Docker\\"'
 
 notifications:
   - provider: Email

@@ -20,7 +20,7 @@ cache:
 
 build_script:
   - docker pull microsoft/nanoserver
-  - "%PYTHON%\\python.exe -m pip install setuptools docker sysconfig"
+  - "%PYTHON%\\python.exe -m pip install setuptools docker"
   - travis-tool.sh install_deps
 
 test_script:

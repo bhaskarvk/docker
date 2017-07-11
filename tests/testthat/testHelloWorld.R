@@ -1,5 +1,5 @@
 library(reticulate)
-use_virtualenv("docker")
+py_discover_config("docker")
 library(docker)
 
 # helper function to skip tests if we don't have the 'docker' module
@@ -15,7 +15,6 @@ skip_if_no_docker_engine <- function() {
   if(!c$ping()) {
     skip("Skipping test: No Docker engine found")
   }
-
 }
 
 skip_os_platform <- function(platform = 'windows') {

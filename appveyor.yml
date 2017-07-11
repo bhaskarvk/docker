@@ -25,6 +25,7 @@ build_script:
 
 before_test:
   - echo %RETICULATE_PYTHON%
+  - echo %PATH%
 
 test_script:
   - travis-tool.sh run_tests
@@ -57,6 +58,7 @@ environment:
     _R_CHECK_FORCE_SUGGESTS_: false
     PYTHON: "C:\\Python35"
     RETICULATE_PYTHON: "C:\\Python35"
+    PATH: "%PYTHON%;%PATH%"
 
 notifications:
   - provider: Email

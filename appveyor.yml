@@ -25,10 +25,10 @@ build_script:
 
 before_test:
   - echo %RETICULATE_PYTHON%
-  - set PATH="%PYTHON%;%PATH%"
   - echo %PATH%
 
 test_script:
+  - travis-tool.sh install_github rstudio/reticulate
   - travis-tool.sh run_tests
 
 on_failure:
@@ -56,7 +56,7 @@ artifacts:
 
 environment:
   global:
-    _R_CHECK_FORCE_SUGGESTS_: false
+    USE_RTOOLS: true
     PYTHON: "C:\\Python35"
     RETICULATE_PYTHON: "C:\\Python35"
 

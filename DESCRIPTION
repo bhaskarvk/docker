@@ -18,3 +18,4 @@ Roxygen: list(markdown = TRUE)
 URL: https://github.com/bhaskarvk/docker
 BugReports: https://github.com/bhaskarvk/docker/issues
 Suggests: testthat
+Remotes: rstudio/reticulate

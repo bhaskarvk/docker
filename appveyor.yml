@@ -25,6 +25,7 @@ build_script:
 
 before_test:
   - echo %RETICULATE_PYTHON%
+  - set PATH="%PYTHON%;%PATH%"
   - echo %PATH%
 
 test_script:
@@ -58,7 +59,6 @@ environment:
     _R_CHECK_FORCE_SUGGESTS_: false
     PYTHON: "C:\\Python35"
     RETICULATE_PYTHON: "C:\\Python35"
-    PATH: "%PYTHON%;%PATH%"
 
 notifications:
   - provider: Email

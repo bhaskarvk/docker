@@ -25,6 +25,7 @@ build_script:
 
 before_test:
   - set PATH="%PYTHON%;%PATH%"
+  - echo %PATH%
 
 test_script:
   - travis-tool.sh run_tests

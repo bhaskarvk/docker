@@ -1,3 +1,4 @@
+.libPaths()
 library(reticulate)
 py_discover_config("docker")
 library(docker)

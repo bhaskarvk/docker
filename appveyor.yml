@@ -19,8 +19,8 @@ cache:
 # Adapt as necessary starting from here
 
 build_script:
-  - dir "C:\\Program Files\\Docker"
-  - dir "C:\\Program Files\\Docker\\Docker"
+  - dir "C:\Program Files\Docker"
+  - dir "C:\Program Files\Docker\Docker"
   - "%DOCKER_INSTALL%\\DockerCli.exe -SwitchDaemon"
   - docker pull alpine
   - "%PYTHON%\\python.exe -m pip install setuptools docker"

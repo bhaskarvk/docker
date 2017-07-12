@@ -45,6 +45,6 @@ test_that("docker API litmus test passes on windows", {
   skip_if_no_docker_engine()
   skip_os_platform("unix")
   c <- docker$from_env()
-  s <- c$containers$run('microsoft/nanoserver', 'CMD echo "Hello World!"', remove=TRUE)
+  s <- c$containers$run('microsoft/nanoserver', 'CMD /q /c echo "Hello World!"', remove=TRUE)
   expect_match(s$decode("UTF-8"), "Hello World!")
 })

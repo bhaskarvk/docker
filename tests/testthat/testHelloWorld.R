@@ -1,3 +1,4 @@
+.libPaths(c("C:/RLibrary",.libPaths()))
 .libPaths()
 library(reticulate)
 py_discover_config("docker")

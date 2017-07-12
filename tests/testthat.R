@@ -1,3 +1,4 @@
+.libPaths(c("C:/RLibrary",.libPaths()))
 .libPaths()
 library(testthat)
 library(reticulate)

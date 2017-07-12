@@ -15,7 +15,7 @@ install:
 
 build_script:
   - docker pull microsoft/nanoserver
-  - "%PYTHON%\\python.exe -m pip install setuptools docker"
+  - "%PYTHON%\\python.exe -m pip install setuptools pypiwin32 docker"
   - travis-tool.sh install_github rstudio/reticulate
   - travis-tool.sh install_deps
 

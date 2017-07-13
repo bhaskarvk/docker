@@ -1,0 +1,158 @@
+---
+title: "Getting Started with 'docker'"
+author: "user001 V. Karambelkar"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with 'docker'}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The `docker` R package provides access to the [docker](https://www.docker.com/) [API](https://docs.docker.com/engine/api/) to programmatically control a docker engine from R. The docker engine could be running either locally or remotely. The `docker` package uses the [reticulate](https://rstudio.github.io/reticulate/) R package to invoke the [Python SDK](https://docker-py.readthedocs.io/en/stable/) for docker. Using the Python SDK allows the `docker` package to have a very minimal foot-print and yet allow complete docker API access. The package has been tested against docker engine running on [Linux](https://www.docker.com/docker-ubuntu) and [Microsoft Windows](https://www.docker.com/docker-windows) and should also work under [MacOS](https://www.docker.com/docker-mac).
+
+Controlling a docker engine from withing R can be useful for ...
+
+- Writing automated unit/integration tests for R packages against running services in docker containers. The package author can start a docker container, execute the tests, and tear the container down, all from withing the R code of the test.
+- Another use case is easy access to containerized services as part of a researchers reproducible research workflow. Having access to a containerized service ensures that the research code executes identically regardless of where it's run.
+
+## Installation
+
+The package is not yet on CRAN so install it directly from GitHub using `devtools`.
+
+```{r install, eval=FALSE}
+
+install.packages('reticulate') # For Python access
+
+if(!require(devtools)) {
+  install.packages("devtools")
+}
+devtools::install_github('user001vk/docker')
+```
+
+## Setup
+
+Before you can use this package you need to have Python > 3.0 (preferably > 3.5) with the [docker](https://docker-py.readthedocs.io/en/stable/index.html) Python module which provides Python SDK for docker. A simple way to do this is using a [virtual environment](http://docs.python-guide.org/en/latest/dev/virtualenvs/). [virtualenvwrapper](http://docs.python-guide.org/en/latest/dev/virtualenvs/#virtualenvwrapper) makes setting up Python modules quite painless.
+
+Once you have installed Python 3.5+ and setup `virtualenvwrapper` you need to create a new virtual environment and install the `docker` Python module in it.
+
+```bash
+mkvirtualenv --python=/usr/bin/python3 docker
+workon docker
+pip install docker
+
+# Test the SDK againsts a locally running docker
+# You should have a locally running docker engine for this.
+python -c 'import docker; print(docker.from_env().version())'
+```
+
+You should see something like below, provided you had a locally running docker engine.
+
+```
+{'Os': 'linux', 'Arch': 'amd64', 'KernelVersion': '4.10.0-24-generic', 'GitCommit': '02c1d87',
+'Version': '17.06.0-ce', 'BuildTime': '2017-06-23T21:19:04.990631145+00:00',
+'MinAPIVersion': '1.12', 'GoVersion': 'go1.8.3', 'ApiVersion': '1.30'}
+```
+
+## Examples
+
+### Hello World!
+
+Here we provide a simple getting started example. We start the [alpine](https://store.docker.com/images/alpine) docker image which is a small Linux image.We run a command to output "Hello World!" from within the started docker container and access it on the R side. 
+
+```{r hello-world, eval=FALSE}
+# This is a hint to the reticulate package to find a
+# python environment with the "docker" python module available.
+reticulate::use_virtualenv("docker")
+library(docker)
+client <- docker$from_env()
+s <- client$containers$run("alpine", 'echo -n "Hello World!"', remove=TRUE)
+print(s$decode("UTF-8"))
+```
+
+```
+[1] Hello World!
+
+```
+
+
+### Real-World Example
+
+Below is more of a real-world example where we start a [redis](https://redis.io/) container and interact with it using the `rredis` package, and subsequently tear it down.
+
+```{r redis, eval=FALSE}
+reticulate::py_discover_config("docker")
+library(docker)
+library(rredis)
+
+docker_client <- docker$from_env()
+docker_client$ping()
+
+redis_instance <- docker_client$containers$run(
+  'redis', name='redis', detach=TRUE, ports=list('6379/tcp'='6379'))
+redis_instance$status
+
+redisConnect(host='127.0.0.1', port=6379, nodelay=TRUE)
+redisSet('docker-test', rnorm(20))
+redisGet('docker-test')
+
+redis_instance$stop()
+redis_instance$remove()
+```
+
+And here's how it looks when run.
+
+```
+> reticulate::py_discover_config("docker")
+python:         /home/user001/.virtualenvs/docker/bin/python
+libpython:      /usr/lib/python3.5/config-3.5m-x86_64-linux-gnu/libpython3.5.so
+pythonhome:     /usr:/usr
+virtualenv:     /home/user001/.virtualenvs/docker/bin/activate_this.py
+version:        3.5.2 (default, Nov 17 2016, 17:05:23)  [GCC 5.4.0 20160609]
+numpy:          /home/user001/.virtualenvs/docker/lib/python3.5/site-packages/numpy
+numpy_version:  1.13.1
+docker:         /home/user001/.virtualenvs/docker/lib/python3.5/site-packages/docker
+
+python versions found: 
+ /home/user001/.virtualenvs/docker/bin/python
+ /usr/bin/python
+ /usr/bin/python3
+
+> library(docker)
+
+> library(rredis)
+
+> docker_client <- docker$from_env()
+
+> docker_client$ping()
+[1] TRUE
+
+> redis_instance <- docker_client$containers$run(
+   'redis', name='redis', detach=TRUE, ports=list('6379/tcp'='6379'))
+
+> redis_instance$status
+[1] "created"
+
+> Sys.sleep(5) # Wait for the container to start the service.
+
+> redisConnect(host='127.0.0.1', port=6379, nodelay=TRUE)
+
+> redisSet('docker-test', rnorm(20))
+[1] "OK"
+
+> redisGet('docker-test')
+ [1]  1.01545119  0.08353996  0.71668645 -0.34256345 -0.09871241  0.24834106
+ [7]  0.28802550  0.02321578 -1.62448884 -1.31099073  0.54530365  1.29799034
+[13]  0.80973704  0.30018833 -0.72609402 -0.47678730 -0.79877246  1.08857741
+[19] -1.92010832  1.61439356
+
+> redis_instance$stop()
+> redis_instance$remove()
+```
+
+The `reticulate::py_discover_config("docker")` call is used to ensure that `reticulate` was able to find a Python environment with the `docker` Python module installed.
+
+### Other Docker APIs
+
+You can call every API supported by the Python SDK using reticulate. Please consult the documents for the SDK and the reticulate R package in the links given above.
+

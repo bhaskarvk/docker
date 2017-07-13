@@ -4,3 +4,4 @@
 .Rprofile.local
 *.swp
 docs
+inst/doc

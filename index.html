@@ -37,6 +37,18 @@
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/Getting_Started_with_Docker.html">Getting Started with 'docker'</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="news/index.html">News</a>
 </li>
@@ -68,7 +80,12 @@
 <div id="docker-an-r-package-for-docker" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#docker-an-r-package-for-docker" class="anchor"></a><code>docker</code>: An R Package for Docker</h1></div>
-<p>The goal of docker is to provide access to the <a href="https://www.docker.com/">docker</a> <a href="https://docs.docker.com/engine/api/">API</a> via <a href="https://rstudio.github.io/reticulate/">reticulate</a> using the <a href="https://docker-py.readthedocs.io/en/stable/">Python SDK</a> for docker.</p>
+<p>The <code>docker</code> R package provides access to the <a href="https://www.docker.com/">docker</a> <a href="https://docs.docker.com/engine/api/">API</a> to programmatically control a docker engine from R. The docker engine could be running either locally or remotely. The <code>docker</code> package uses the <a href="https://rstudio.github.io/reticulate/">reticulate</a> R package to invoke the <a href="https://docker-py.readthedocs.io/en/stable/">Python SDK</a> for docker. Using the Python SDK allows the <code>docker</code> package to have a very minimal foot-print and yet allow complete docker API access. The package has been tested against docker engine running on <a href="https://www.docker.com/docker-ubuntu">Linux</a> and <a href="https://www.docker.com/docker-windows">Microsoft Windows</a> and should also work under <a href="https://www.docker.com/docker-mac">MacOS</a>.</p>
+<p>Controlling a docker engine from withing R can be useful for …</p>
+<ul>
+<li>Writing automated unit/integration tests for R packages against running services in docker containers. The package author can start a docker container, execute the tests, and tear the container down, all from withing the R code of the test.</li>
+<li>Another use case is easy access to containerized services as part of a researchers reproducible research workflow. Having access to a containerized service ensures that the research code executes identically regardless of where it’s run.</li>
+</ul>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -80,8 +97,8 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <div id="setup" class="section level2">
 <h2 class="hasAnchor">
 <a href="#setup" class="anchor"></a>Setup</h2>
-<p>Before you can use this package, you need to have python &gt; 3.0 (preferably &gt; 3.5), and the <a href="https://docker-py.readthedocs.io/en/stable/index.html">docker</a> module which provides Python SDK for docker. A simple way to do this is using a <a href="http://docs.python-guide.org/en/latest/dev/virtualenvs/">virtual environment</a>. <a href="http://docs.python-guide.org/en/latest/dev/virtualenvs/#virtualenvwrapper">virtualenvwrapper</a> makes setting up and working on virtual envs quite painless.</p>
-<p>Once you have setup <code>virtualenvwrapper</code>, you need to create a new virtual environment and install the <code>docker</code> Python module in it.</p>
+<p>Before you can use this package you need to have Python &gt; 3.0 (preferably &gt; 3.5) with the <a href="https://docker-py.readthedocs.io/en/stable/index.html">docker</a> Python module which provides Python SDK for docker. A simple way to do this is using a <a href="http://docs.python-guide.org/en/latest/dev/virtualenvs/">virtual environment</a>. <a href="http://docs.python-guide.org/en/latest/dev/virtualenvs/#virtualenvwrapper">virtualenvwrapper</a> makes setting up Python modules quite painless.</p>
+<p>Once you have installed Python 3.5+ and setup <code>virtualenvwrapper</code> you need to create a new virtual environment and install the <code>docker</code> Python module in it.</p>
 <div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">mkvirtualenv</span> --python=/usr/bin/python3 docker
 <span class="ex">workon</span> docker
 <span class="ex">pip</span> install docker
@@ -135,7 +152,7 @@ s &lt;-<span class="st"> </span>client<span class="op">$</span>containers<span c
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="http://www.repostatus.org/#active"><img src="http://www.repostatus.org/badges/latest/active.svg" alt="Project Status: Active – The project has reached a stable, usable state and is being actively developed."></a></li>
-<li><a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2017--07--10-green.svg" alt="Last-changedate"></a></li>
+<li><a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2017--07--13-green.svg" alt="Last-changedate"></a></li>
 <li><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></li>
 <li><a href="https://gist.github.com/bhaskarvk/46fbf2ba7b5713151d7e"><img src="https://img.shields.io/badge/keybase-verified-brightgreen.svg" alt="keybase verified"></a></li>
 <li><a href="https://travis-ci.org/bhaskarvk/docker"><img src="https://travis-ci.org/bhaskarvk/docker.svg?branch=master" alt="Travis-CI Build Status"></a></li>

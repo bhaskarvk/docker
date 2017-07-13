@@ -1,6 +1,6 @@
 Package: docker
 Title: Wraps Docker Python SDK
-Version: 0.0.1
+Version: 0.0.9000
 Authors@R: person("Bhaskar", "Karambelkar", email = "bhaskarvk@gmail.com",
                   role = c("aut", "cre"))
 Description: Allows accessing 'Docker' 'SDK' from 'R' via the 'Docker' 'Python' 'SDK' using the 'reticulate' package.
@@ -21,3 +21,4 @@ Suggests: testthat,
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+Remotes: rstudio/reticulate

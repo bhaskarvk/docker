@@ -1,6 +1,6 @@
 ---
 title: "Getting Started with 'docker'"
-author: "user001 V. Karambelkar"
+author: "Bhaskar V. Karambelkar"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -18,12 +18,15 @@ Controlling a docker engine from withing R can be useful for ...
 
 ## Installation
 
-The package is not yet on CRAN so install it directly from GitHub using `devtools`.
+Release version
 
-```{r install, eval=FALSE}
+```{r cran, eval=FALSE}
+install.packages('docker')
+```
 
-install.packages('reticulate') # For Python access
+OR development version
 
+```{r github, eval=FALSE}
 if(!require(devtools)) {
   install.packages("devtools")
 }

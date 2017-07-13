@@ -15,7 +15,7 @@ Imports: reticulate
 SystemRequirements: Python (>= 2.7)
 RoxygenNote: 6.0.1
 Roxygen: list(markdown = TRUE)
-URL: https://github.com/bhaskarvk/docker
+URL: https://github.com/bhaskarvk/docker, https://bhaskarvk.github.io/docker/
 BugReports: https://github.com/bhaskarvk/docker/issues
 Suggests: testthat,
     knitr,

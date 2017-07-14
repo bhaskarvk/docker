@@ -37,15 +37,21 @@ test_that("docker API litmus test passes on *nix", {
   skip_if_no_docker_engine()
   c <- docker$from_env()
   s <- c$containers$run('alpine', 'echo -n "Hello World!"', remove=TRUE)
-  expect_match(s$decode("UTF-8"), "Hello World!")
+  if(!inherits(s,'character')) { # python 2 vs 3
+    s <- s$decode('UTF-8')
+  }
+  expect_match(s, "Hello World!")
 })
 
 test_that("docker API litmus test passes on windows", {
   skip_on_cran()
   skip_on_bioc()
-  skip_os_platform("unix")
+  skip_on_os(c("linux", "mac", "solaris"))
   skip_if_no_docker_engine()
   c <- docker$from_env()
   s <- c$containers$run('microsoft/nanoserver', 'CMD /q /c echo "Hello World!"', remove=TRUE)
-  expect_match(s$decode("UTF-8"), "Hello World!")
+  if(!inherits(s,'character')) { # python 2 vs 3
+    s <- s$decode('UTF-8')
+  }
+  expect_match(s, "Hello World!")
 })

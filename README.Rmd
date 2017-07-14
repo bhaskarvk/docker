@@ -50,9 +50,9 @@ devtools::install_github('bhaskarvk/docker')
 
 ## Setup
 
-Before you can use this package you need to have Python > 3.0 (preferably > 3.5) with the [docker](https://docker-py.readthedocs.io/en/stable/index.html) Python module which provides Python SDK for docker. A simple way to do this is using a [virtual environment](http://docs.python-guide.org/en/latest/dev/virtualenvs/). [virtualenvwrapper](http://docs.python-guide.org/en/latest/dev/virtualenvs/#virtualenvwrapper) makes setting up Python modules quite painless.
+Before you can use this package you need to have Python  2.x (>=2.7) or Python 3.x (>=3.4) with the [docker](https://docker-py.readthedocs.io/en/stable/index.html) Python module which provides Python SDK for docker. A simple way to do this is using a [virtual environment](http://docs.python-guide.org/en/latest/dev/virtualenvs/). [virtualenvwrapper](http://docs.python-guide.org/en/latest/dev/virtualenvs/#virtualenvwrapper) makes setting up Python modules quite painless.
 
-Once you have installed Python 3.5+ and setup `virtualenvwrapper` you need to create a new virtual environment and install the `docker` Python module in it.
+Once you have installed Python and setup `virtualenvwrapper` you need to create a new virtual environment and install the `docker` Python module in it.
 
 ```bash
 mkvirtualenv --python=/usr/bin/python3 docker

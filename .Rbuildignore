@@ -11,3 +11,4 @@
 ^\_pkgdown\.yaml$
 ^docs$
 ^appveyor\.yml$
+^data-raw$

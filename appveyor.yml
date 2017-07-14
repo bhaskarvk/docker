@@ -68,12 +68,6 @@ artifacts:
   - path: '\*_*.zip'
     name: Bits
 
-environment:
-  global:
-    USE_RTOOLS: true
-    PYTHON: "C:\\Python35"
-    RETICULATE_PYTHON: "C:\\Python35"
-
 notifications:
   - provider: Email
     to:

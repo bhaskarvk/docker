@@ -12,7 +12,7 @@ r:
 
 env:
   global:
-    NOT_CRAN: true
+    - NOT_CRAN=true
   matrix:
     - PYTHON=2 PIP="pip" RETICULATE_PYTHON="/usr/bin/python"
     - PYTHON=3 PIP="pip3" RETICULATE_PYTHON="/usr/bin/python3"
@@ -24,7 +24,7 @@ services:
 
 before_install:
   - docker pull alpine
-  - [[ "x$PYTHON" == "x2" ]] && sudo apt-get -y install python-pip python-numpy python-dev
-  - [[ "x$PYTHON" == "x3" ]] && sudo apt-get -y install python3-pip python-dev python3-numpy
+  - test "x$PYTHON" = "x2" && sudo apt-get -y install python-pip python-numpy python-dev
+  - test "x$PYTHON" = "x3" && sudo apt-get -y install python3-pip python-dev python3-numpy
   - sudo $PYTHON install -U setuptools
   - sudo $PYTHON install -U docker
